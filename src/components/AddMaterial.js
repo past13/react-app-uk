@@ -12,7 +12,6 @@ const AddMaterial = () => {
     const addMaterial = (e) => {
         e.preventDefault();
 
-        console.log(e);
         let id = Math.max.apply(Math, materials.map(function(o) { 
             return o.id + 1; 
         }))
