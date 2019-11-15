@@ -6,13 +6,21 @@ import React from 'react';
 // import { LocationsProvider } from '../components/LocationContext';
 // import AddLocation from '../components/AddLocation';
 // import MaterialList from '../components/MaterialList';
-// import { MaterialsProvider } from './MaterialContext';
-// import AddMaterial from './AddMaterial';
+
+import { ProjectsProvider } from './../components/ProjectContext';
+import ProjectList from './../components/ProjectList';
 
 export default function Main() {
 
     return(
         <main>
+            <ProjectsProvider>
+                <ProjectList />
+            </ProjectsProvider>
+          
+            {/* <ProjectsProvider>
+                <ProjectList />
+            </ProjectsProvider> */}
             {/* <MovieProvider>
             <div className="App">
                 <AddMovie />

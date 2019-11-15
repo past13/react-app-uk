@@ -23,11 +23,12 @@ export default function NavBar() {
                             <Link to="/profile">Profile</Link>
                         </li>
                     </ul>
+                    //todo: move to another component
                     <Switch>
                         <Route exact path="/" render={() => <Home />}/>
-                        <Route exact path="/yourlist" render={() => <div>Yourlist</div> }/>
-                        <Route exact path="/logaut" render={() => <div>Logaut</div> }/>
-                        <Route exact path="/profile" render={() => <div>Profile</div> }/>
+                        <Route path="/yourlist" render={() => <div>Yourlist</div> }/>
+                        <Route path="/logaut" render={() => <div>Logaut</div> }/>
+                        <Route path="/profile" render={() => <div>Profile</div> }/>
                       
                         <Route render={() => <Notfound />} />
                     </Switch>
