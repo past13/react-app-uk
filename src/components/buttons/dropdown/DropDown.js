@@ -30,7 +30,6 @@ class DropDown extends Component {
 
     render() {
         const values = this.props.values || [];
-        console.log(values);
         if (values.length === 0) {
             return <p>Sorry, the list is empty.</p>;
           } else {
