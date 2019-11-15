@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Button from './buttons/SubmitButton'
 import DropDown from './buttons/dropdown/DropDown';
-
+import ImportExample from './buttons/ImportExample';
 
 export default class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {};  
+        this.state = {}; 
+        this.inputRef = React.createRef();
     }
     
     async componentDidMount() {
@@ -21,6 +22,11 @@ export default class Home extends Component {
         })
     }
  
+    handleSubmit = e => {
+        e.preventDefault();
+        this.setState({ value: this.inputRef.current.value})
+      };
+
     render() {
         const actionType = [
             {
@@ -41,7 +47,7 @@ export default class Home extends Component {
             <>           
                 <div>
                     <div>Action type</div>
-                    <DropDown values={actionType} ref={this.myRef} />
+                    <DropDown values={actionType} />
                 </div>
                 <div>
                     <div>Location</div>
@@ -55,7 +61,13 @@ export default class Home extends Component {
                     <div>Categories</div>
                     <DropDown values={categories} />
                 </div>
-                <Button />
+                <div>
+                    Value: {this.state.value}
+                </div>
+                <form onSubmit={this.handleSubmit}>
+                    <ImportExample ref={this.inputRef} />
+                    <Button />
+                </form>
             </>
         )
     }

@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 import CustomMenu  from './CustomMenu';
 import CustomToggle from './CustomToggle';
 
+
 class DropDown extends Component {
     constructor(props) {
         super(props);
@@ -30,9 +31,10 @@ class DropDown extends Component {
 
     render() {
         const values = this.props.values || [];
+
         if (values.length === 0) {
             return <p>Sorry, the list is empty.</p>;
-          } else {
+        } else {
         return (
             <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
