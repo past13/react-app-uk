@@ -3,9 +3,11 @@ import { Route, Link, BrowserRouter, Switch } from 'react-router-dom';
 import Notfound from '../components/Notfound';
 import Home from '../components/Home';
 
-export default function NavBar() {
+import Projects from '../components/Projects/Projects';
 
-    return(
+
+export default function NavBar() {
+    return (
         <nav>
             <BrowserRouter>
                 <Fragment>
@@ -23,10 +25,10 @@ export default function NavBar() {
                             <Link to="/profile">Profile</Link>
                         </li>
                     </ul>
-                    //todo: move to another component
                     <Switch>
                         <Route exact path="/" render={() => <Home />}/>
-                        <Route path="/yourlist" render={() => <div>Yourlist</div> }/>
+                        <Route path="/yourlist" render={() => <Projects /> }/>
+                        
                         <Route path="/logaut" render={() => <div>Logaut</div> }/>
                         <Route path="/profile" render={() => <div>Profile</div> }/>
                       
