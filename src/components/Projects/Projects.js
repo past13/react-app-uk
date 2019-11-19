@@ -4,7 +4,6 @@ import { ProjectsProvider } from '../ProjectContext';
 import ProjectList from '../ProjectList';
 import AddProject from './AddProject';
 
-
 export default function Projects() {
     return(
         <main>
