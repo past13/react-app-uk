@@ -8,6 +8,10 @@ export default class Home extends Component {
         super(props);
         this.state = {}; 
         this.inputRef = React.createRef();
+        this.inputActionTypeRef = React.createRef();
+        this.inputCategoriesRef = React.createRef();      
+        this.inputMaterialsRef = React.createRef();
+        this.inputLocationsRef = React.createRef();
     }
     
     async componentDidMount() {
@@ -24,7 +28,14 @@ export default class Home extends Component {
  
     handleSubmit = e => {
         e.preventDefault();
-        this.setState({ value: this.inputRef.current.value})
+        this.setState({ 
+            inputs: {
+                actionTypeValue: this.inputActionTypeRef.current.textContent,
+                categoriesValue: this.inputCategoriesRef.current.textContent,
+                materialsValue: this.inputMaterialsRef.current.textContent,
+                locationsValue: this.inputLocationsRef.current.textContent,
+            }
+        })
       };
 
     render() {
@@ -43,28 +54,15 @@ export default class Home extends Component {
         const materials = this.state.materials || [];
         const categories = this.state.categories || [];
 
+        console.log(this.state);
         return (
             <>           
-                <div>
-                    <div>Action type</div>
-                    <DropDown values={actionType} />
-                </div>
-                <div>
-                    <div>Location</div>
-                    <DropDown values={locations} />
-                </div>
-                <div>
-                    <div>Material</div>
-                    <DropDown values={materials} />
-                </div>
-                <div>
-                    <div>Categories</div>
-                    <DropDown values={categories} />
-                </div>
-                <div>
-                    Value: {this.state.value}
-                </div>
                 <form onSubmit={this.handleSubmit}>
+                    <DropDown values={actionType} ref={this.inputActionTypeRef} />
+                    <DropDown values={categories} ref={this.inputCategoriesRef} />
+                    <DropDown values={materials} ref={this.inputMaterialsRef} />
+                    <DropDown values={locations} ref={this.inputLocationsRef} />
+                    
                     <ImportExample ref={this.inputRef} />
                     <Button />
                 </form>

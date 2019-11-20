@@ -8,6 +8,6 @@ class ImportExample extends Component {
     }
 }
 
-export default React.forwardRef((props, ref) => <ImportExample 
-  innerRef={ref} {...props}
+export default React.forwardRef((props, ref) => 
+    <ImportExample innerRef={ref} {...props}
 />);

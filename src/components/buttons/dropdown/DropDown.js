@@ -14,7 +14,7 @@ class DropDown extends Component {
 
         this.state = {
             values: [],
-            targetLocation: ""
+            targetValue: ""
         }
     }
 
@@ -26,7 +26,7 @@ class DropDown extends Component {
     }
     
     testHandle(e) {
-        this.setState({ targetLocation: e.target.text })
+        this.setState({ targetValue: e.target.text })
     }
 
     render() {
@@ -38,7 +38,7 @@ class DropDown extends Component {
         return (
             <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                    <Button id="ddllocation" type="submit">{this.state.targetLocation !== "" ? this.state.targetLocation : "Take value"}</Button>
+                    <Button id="ddllocation" type="text" ref={this.props.innerRef}>{this.state.targetValue !== "" ? this.state.targetValue : "Take value"}</Button>
                 </Dropdown.Toggle>
                 <Dropdown.Menu as={CustomMenu}>
                     {values.map(item => (
@@ -51,4 +51,6 @@ class DropDown extends Component {
     }
 }
 
-export default DropDown;
+export default React.forwardRef((props, ref) => 
+    <DropDown innerRef={ref} {...props}
+/>);
