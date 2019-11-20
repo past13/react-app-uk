@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import React, { useState } from 'react';
 
 const AddProject = () => {
@@ -55,7 +54,7 @@ const AddProject = () => {
         axios.post('http://localhost:5000/projects/', project, {
             // body: project
         }).then((response) => {
-              console.log('response',response.data)
+              console.log('response',response)
         }).catch((error) => {
             console.log(error)
         })
