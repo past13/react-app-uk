@@ -15,20 +15,16 @@ const AddLocation = () => {
         setName(e.target.value);
     }
 
-
     const addLocation = (e) => {
         e.preventDefault();
         // let id = Math.max.apply(Math, movies.map(function(o) { 
         //     return o.id + 1; 
         // }))
-
     }
 
     return (
         <form onSubmit={AddLocation}>
            <input type="text" name="name" value={name} onChange={updateName}/>
-        
-
             <button>Submit</button>
         </form>
     );

@@ -4,6 +4,7 @@ import Notfound from '../components/Notfound';
 import Home from '../components/Home';
 
 import Projects from '../components/Projects/Projects';
+import ProjectDetail from '../components/Projects/ProjectDetail';
 
 export default function NavBar() {
     return (
@@ -26,11 +27,13 @@ export default function NavBar() {
                     </ul>
                     <Switch>
                         <Route exact path="/" render={() => <Home />}/>
-                        <Route path="/yourlist" render={() => <Projects /> }/>
+                        <Route path="/yourlist" render={() => <Projects />}/>
                         
-                        <Route path="/logaut" render={() => <div>Logaut</div> }/>
-                        <Route path="/profile" render={() => <div>Profile</div> }/>
-                      
+                        <Route path="/logaut" render={() => <div>Logout</div>}/>
+                        <Route path="/profile" render={() => <div>Profile</div>}/>
+
+                        <Route path='/project/:id' render={(id) => <ProjectDetail id={id} />} />
+
                         <Route render={() => <Notfound />} />
                     </Switch>
                 </Fragment>

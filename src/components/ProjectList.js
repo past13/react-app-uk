@@ -1,34 +1,25 @@
-import React, { useContext, useState} from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom'; 
 import { ProjectContext } from './ProjectContext';
 
 const ProjectList = () => {
     const [projectsContext] = useContext(ProjectContext);
     const projectList = Array.from(projectsContext);
 
-    const deleteUser = (id) => {
-        // const result = projectList.filter(project => project._id === id);
-        axios.delete(`http://localhost:5000/projects/${id}`, {
-            // body: project
-        }).then((response) => {
-              console.log('deleted',response)
-        }).catch((error) => {
-            console.log(error)
-        })
-        // setProjects(result);
-    }
-
     return (
         <div>
-
-            {projectList.map((item) => {
-                return (
-                    <div key={item._id}>
-                        <div>{item.name}</div>
-                        <button onClick={deleteUser.bind(this, item._id)}>Delete</button>
-                    </div>
+            {projectList.map((item) => (
+                <li key={item._id}>
+                <Link to={{ pathname: '/project/' + item._id}}>
+                    {item.name}
+                </Link>
+                </li>
+            ))}
+            {/* {projectList.map((item) => {           
+                return (                
+                    <ProjectDetail key={item._id} project={item} />   
                 )
-            })}
+            })} */}
         </div>
     );
 }
