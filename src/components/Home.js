@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import Button from './buttons/SubmitButton'
 import DropDown from './buttons/dropdown/DropDown';
-import ImportExample from './buttons/ImportExample';
 
 export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {}; 
-        this.inputRef = React.createRef();
         this.inputActionTypeRef = React.createRef();
         this.inputCategoriesRef = React.createRef();      
         this.inputMaterialsRef = React.createRef();
@@ -22,12 +20,30 @@ export default class Home extends Component {
         this.setState({ 
             locations: locations,
             materials: materials,
-            categories: categories
+            categories: categories,
+            inputs: {}
         })
     }
  
-    handleSubmit = e => {
+    checkDropDown = (inputArray) => {
+        inputArray.forEach(element => {
+            if (element[1] === 'Take value') {
+                console.log(element);
+            }
+        });
+    }
+
+
+
+    convertInputsToArray = () => {
+        const inputArray = Object.entries(this.state.inputs).sort((a, b) => a[0].localeCompare(b[0]));
+
+        this.checkDropDown(inputArray);
+    }
+
+    handleSubmit = (e) => {
         e.preventDefault();
+
         this.setState({ 
             inputs: {
                 actionTypeValue: this.inputActionTypeRef.current.textContent,
@@ -36,6 +52,8 @@ export default class Home extends Component {
                 locationsValue: this.inputLocationsRef.current.textContent,
             }
         })
+
+        this.convertInputsToArray();
       };
 
     render() {
@@ -54,7 +72,6 @@ export default class Home extends Component {
         const materials = this.state.materials || [];
         const categories = this.state.categories || [];
 
-        console.log(this.state);
         return (
             <>           
                 <form onSubmit={this.handleSubmit}>
@@ -63,7 +80,6 @@ export default class Home extends Component {
                     <DropDown values={materials} ref={this.inputMaterialsRef} />
                     <DropDown values={locations} ref={this.inputLocationsRef} />
                     
-                    <ImportExample ref={this.inputRef} />
                     <Button />
                 </form>
             </>
