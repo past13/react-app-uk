@@ -1,15 +1,4 @@
-import React, { Component, useContext } from 'react';
-import axios from 'axios';
-import { ProjectContext } from './../ProjectContext';
-
-const deleteUser = (id) => {
-    axios.delete(`http://localhost:5000/projects/${id}`, {
-    }).then((response) => {
-          console.log('deleted',response)
-    }).catch((error) => {
-        console.log(error)
-    })
-}
+import React, { Component } from 'react';
 
 class ProjectDetail extends Component {
     constructor(props) {
@@ -22,7 +11,9 @@ class ProjectDetail extends Component {
 
     async componentDidMount() {
         const project = await (await fetch(`http://localhost:5000/projects/${this.state.projectId}`)).json()
-        this.setState({ project })
+        if (project) {
+            this.setState({ project })
+        }
     }
 
     render() {
@@ -31,15 +22,26 @@ class ProjectDetail extends Component {
         const location = this.state.project.location || {};
 
         return (
+            <div>
+                <div>{project.name}</div>
+                <div>{project.phoneNumber}</div>
+                <div>{project.email}</div>
+                <div>{project.description}</div>
                 <div>
-                    <div>{project.name}</div>
-                    <div>{project.phoneNumber}</div>
-                     <div>{project.email}</div>
-                    <div>{project.description}</div>
-                    <div>{location.city}</div>
-                    <div>{material.name}</div> 
-                    <button onClick={deleteUser.bind(this, this.state.project._id)}>Delete</button>
+                    {location === null ? (
+                        <div>Loading location ...</div>
+                    ) : (
+                        <div>{location.city}</div>
+                    )}
                 </div>
+                <div>
+                    {material === null ? (
+                        <div>Loading material ...</div>
+                    ) : (
+                        <div>{material.name}</div>
+                    )}
+                </div>
+            </div>
         );
     }
 }

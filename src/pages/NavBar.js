@@ -28,12 +28,9 @@ export default function NavBar() {
                     <Switch>
                         <Route exact path="/" render={() => <Home />}/>
                         <Route path="/yourlist" render={() => <Projects />}/>
-                        
                         <Route path="/logaut" render={() => <div>Logout</div>}/>
                         <Route path="/profile" render={() => <div>Profile</div>}/>
-
                         <Route path='/project/:id' render={(id) => <ProjectDetail id={id} />} />
-
                         <Route render={() => <Notfound />} />
                     </Switch>
                 </Fragment>

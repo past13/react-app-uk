@@ -52,7 +52,6 @@ const AddProject = () => {
         };
 
         axios.post('http://localhost:5000/projects/', project, {
-            // body: project
         }).then((response) => {
               console.log('response',response)
         }).catch((error) => {
