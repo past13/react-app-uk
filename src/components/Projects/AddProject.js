@@ -1,5 +1,6 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+
+import ProjectService from './services/ProjectService';
 
 const AddProject = () => {
     const [name, setName] = useState('');
@@ -9,6 +10,8 @@ const AddProject = () => {
     const [locationName, setLocation] = useState('');
     const [materialName, setMaterial] = useState('');
     const [categoryName, setCategory] = useState('');
+
+    const service = new ProjectService();
 
     const updateName = (e) => {
         setName(e.target.value);
@@ -37,8 +40,7 @@ const AddProject = () => {
     const updateCategoryName = (e) => {
         setCategory(e.target.value);
     }
-
-    const addProject = (e) => {
+    const addProject = async (e) => {
         e.preventDefault();
 
         const project = {
@@ -51,46 +53,49 @@ const AddProject = () => {
             categoryName: e.target.categoryName.value,
         };
 
-        axios.post('http://localhost:5000/projects/', project, {
-        }).then((response) => {
-              console.log('response',response)
-        }).catch((error) => {
-            console.log(error)
-        })
+        const result = await service.addProject(project);
+
+        if (result.status === 200) {
+            const div = document.getElementById('savedResult');
+            div.innerHTML = 'Saved'
+        }
     }
 
     return (
-        <form onSubmit={addProject}>
-            <label>
-                name
-                <input type="text" name="name" value={name} onChange={updateName}/>
+        <div>
+            <form onSubmit={addProject}>
+                <label>
+                    name
+                    <input type="text" name="name" value={name} onChange={updateName}/>
+                </label>
+                <label>
+                    description
+                    <input type="text" name="description" value={description} onChange={updateDescription}/>
             </label>
             <label>
-                description
-                <input type="text" name="description" value={description} onChange={updateDescription}/>
-           </label>
-           <label>
-                phoneNumber
-                <input type="text" name="phoneNumber" value={phoneNumber} onChange={updatePhoneNumber}/>
-           </label>
-           <label>
-                email
-                <input type="text" name="email" value={email} onChange={updateEmail}/>
-           </label>
-           <label>
-                locationName
-                <input type="text" name="locationName" value={locationName} onChange={updateLocationName}/>
-           </label>
-           <label>
-                materialName
-                <input type="text" name="materialName" value={materialName} onChange={updateMaterialName}/>
-           </label>
-           <label>
-                categoryName
-                <input type="text" name="categoryName" value={categoryName} onChange={updateCategoryName}/>
-           </label>
-            <button>Submit</button>
-        </form>
+                    phoneNumber
+                    <input type="text" name="phoneNumber" value={phoneNumber} onChange={updatePhoneNumber}/>
+            </label>
+            <label>
+                    email
+                    <input type="text" name="email" value={email} onChange={updateEmail}/>
+            </label>
+            <label>
+                    locationName
+                    <input type="text" name="locationName" value={locationName} onChange={updateLocationName}/>
+            </label>
+            <label>
+                    materialName
+                    <input type="text" name="materialName" value={materialName} onChange={updateMaterialName}/>
+            </label>
+            <label>
+                    categoryName
+                    <input type="text" name="categoryName" value={categoryName} onChange={updateCategoryName}/>
+            </label>
+                <button>Submit</button>
+            </form>
+            <div id="savedResult"></div>
+        </div>
     );
 }
 

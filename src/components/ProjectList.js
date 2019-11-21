@@ -1,20 +1,25 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
 import { ProjectContext } from './ProjectContext';
-import axios from 'axios';
 
-const deleteUser = (id) => {
-    axios.delete(`http://localhost:5000/projects/${id}`, {
-    }).then((response) => {
-        console.log('deleted',response)
-    }).catch((error) => {
-        console.log(error)
-    })
-}
+import ProjectService from './Projects/services/ProjectService';
 
 const ProjectList = () => {
-    const [projectsContext] = useContext(ProjectContext);
+    const [projectsContext, setProject] = useContext(ProjectContext);
     const projectList = Array.from(projectsContext);
+
+    const deleteUser = async (id) => {
+        const service = new ProjectService();
+        const result = await service.deleteProject(id);
+
+        if (result.status === 200) {
+            const newProjectList = projectList.filter(project => project._id !== id);
+            setProject(newProjectList);
+
+            const div = document.getElementById('deletedResult');
+            div.innerHTML = 'Deleted'
+        }
+    }
 
     return (
         <div>
@@ -32,6 +37,7 @@ const ProjectList = () => {
                     ))} 
                 </div>
             )}
+            <div id="deletedResult"></div>
         </div>
     );
 }

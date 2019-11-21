@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { LocationContext } from './LocationContext';
 
-
 const AddLocation = () => {
     const [name, setName] = useState('');
     const [country, setCountry] = useState('');

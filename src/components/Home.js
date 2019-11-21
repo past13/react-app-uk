@@ -5,11 +5,12 @@ import DropDown from './buttons/dropdown/DropDown';
 export default class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {}; 
         this.inputActionTypeRef = React.createRef();
         this.inputCategoriesRef = React.createRef();      
         this.inputMaterialsRef = React.createRef();
         this.inputLocationsRef = React.createRef();
+
+        this.state = {}; 
     }
     
     async componentDidMount() {
@@ -33,13 +34,10 @@ export default class Home extends Component {
         });
     }
 
-
-
-    convertInputsToArray = () => {
-        const inputArray = Object.entries(this.state.inputs).sort((a, b) => a[0].localeCompare(b[0]));
-
-        this.checkDropDown(inputArray);
-    }
+    // convertInputsToArray = () => {
+    //     const inputArray = Object.entries(this.state.inputs).sort((a, b) => a[0].localeCompare(b[0]));
+    //     this.checkDropDown(inputArray);
+    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -52,8 +50,6 @@ export default class Home extends Component {
                 locationsValue: this.inputLocationsRef.current.textContent,
             }
         })
-
-        this.convertInputsToArray();
       };
 
     render() {
@@ -71,7 +67,7 @@ export default class Home extends Component {
         const locations = this.state.locations || [];
         const materials = this.state.materials || [];
         const categories = this.state.categories || [];
-
+        
         return (
             <>           
                 <form onSubmit={this.handleSubmit}>
