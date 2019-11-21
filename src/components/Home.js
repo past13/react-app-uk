@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Button from './buttons/SubmitButton'
 import DropDown from './buttons/dropdown/DropDown';
 
+import ProjectService from './Projects/services/ProjectService';
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -25,31 +27,46 @@ export default class Home extends Component {
             inputs: {}
         })
     }
- 
-    checkDropDown = (inputArray) => {
-        inputArray.forEach(element => {
-            if (element[1] === 'Take value') {
-                console.log(element);
+
+    cleanFilledArray = async (list) => {
+        return list.filter(item => {
+            if (item.value !== "Take value") {
+                return item;
             }
         });
     }
 
-    // convertInputsToArray = () => {
-    //     const inputArray = Object.entries(this.state.inputs).sort((a, b) => a[0].localeCompare(b[0]));
-    //     this.checkDropDown(inputArray);
-    // }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-
-        this.setState({ 
-            inputs: {
-                actionTypeValue: this.inputActionTypeRef.current.textContent,
-                categoriesValue: this.inputCategoriesRef.current.textContent,
-                materialsValue: this.inputMaterialsRef.current.textContent,
-                locationsValue: this.inputLocationsRef.current.textContent,
+    convertInputsToArray = async (filter) => {
+        const inputValues = Object.values(filter);
+        const inputKeys = Object.keys(filter);
+        
+        let newList = [];
+        for (let i = 0; i < inputKeys.length; i++) { 
+            let obj = {
+                key: inputKeys[i],
+                value: inputValues[i]
             }
-        })
+            newList.push(obj);
+        }
+
+        return await this.cleanFilledArray(newList);
+    }
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+      
+        const service = new ProjectService();
+
+        const criteria = {
+            actionType: this.inputActionTypeRef.current.textContent,
+            category: this.inputCategoriesRef.current.textContent,
+            material: this.inputMaterialsRef.current.textContent,
+            location: this.inputLocationsRef.current.textContent
+        }
+
+        const cleanCriteria = await this.convertInputsToArray(criteria);
+        const result = await service.filterProjects(cleanCriteria);
+        //todo: show list filtered
       };
 
     render() {

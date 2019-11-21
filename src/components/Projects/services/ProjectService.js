@@ -1,10 +1,9 @@
-import React from 'react';
 import axios from 'axios';
 
 export default class ProjectService {
   addProject = async (project) => {
     try {
-      return await axios.post('http://localhost:5000/projects/', project, {});
+      return await axios.post(`http://localhost:5000/projects/`, project, {});
     }
     catch (error) {
       console.log(error);
@@ -14,6 +13,15 @@ export default class ProjectService {
   deleteProject = async (id) => {
     try {
       return await axios.delete(`http://localhost:5000/projects/${id}`, {});
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  filterProjects = async(filter) => {
+    try {
+      return await axios.post(`http://localhost:5000/filterProjects/`, filter, {});
     }
     catch (error) {
       console.log(error);
