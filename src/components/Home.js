@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Button from './buttons/SubmitButton'
 import DropDown from './buttons/dropdown/DropDown';
+
 import ProjectService from './Projects/services/ProjectService';
+import MaterialService from './Materials/services/MaterialService';
+import LocationService from './Locations/services/LocationService';
+import CategoryService from './Categories/services/CategoryService';
 
 import FilteredProjects from './Projects/FilteredProjects';
 
@@ -14,13 +18,17 @@ export default class Home extends Component {
         this.inputLocationsRef = React.createRef();
 
         this.state = {}; 
+
+        this.projectService = new ProjectService();
+        this.materialService = new MaterialService();
+        this.locationService = new LocationService();
+        this.categoryService = new CategoryService();
     }
     
     async componentDidMount() {
-        //todo: move to service
-        const locations = await (await fetch('http://localhost:5000/locations/')).json();
-        const materials = await (await fetch('http://localhost:5000/materials/')).json()
-        const categories = await (await fetch('http://localhost:5000/categories/')).json()
+        const locations = await this.locationService.getLocations();
+        const materials = await this.materialService.getMaterials();
+        const categories = await this.categoryService.getCategories();
 
         this.setState({ 
             locations: locations,
@@ -67,8 +75,6 @@ export default class Home extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-      
-        const service = new ProjectService();
 
         const criteria = {
             actionType: this.inputActionTypeRef.current.textContent,
@@ -79,7 +85,7 @@ export default class Home extends Component {
         const cleanCriteria = await this.convertInputsToArray(criteria);
         const preparedFilter = await this.assingFilter(cleanCriteria);
         
-        const projects = await service.filterProjects(preparedFilter);
+        const projects = await this.projectService.filterProjects(preparedFilter);
 
         this.setState({
             filteredProjects: projects.data

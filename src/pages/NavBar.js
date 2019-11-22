@@ -16,7 +16,7 @@ export default function NavBar() {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to="/yourlist">Your list</Link>
+                            <Link to="/addProject">Add Project</Link>
                         </li>
                         <li>
                             <Link to="/logaut">Logout</Link>
@@ -27,7 +27,7 @@ export default function NavBar() {
                     </ul>
                     <Switch>
                         <Route exact path="/" render={() => <Home />}/>
-                        <Route path="/yourlist" render={() => <Projects />}/>
+                        <Route path="/addProject" render={() => <Projects />}/>
                         <Route path="/logaut" render={() => <div>Logout</div>}/>
                         <Route path="/profile" render={() => <div>Profile</div>}/>
                         <Route path='/project/:id' render={(id) => <ProjectDetail id={id} />} />
