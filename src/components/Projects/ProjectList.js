@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'; 
 import { ProjectContext } from './ProjectContext';
 
-import ProjectService from './Projects/services/ProjectService';
+import ProjectService from './services/ProjectService';
 
 const ProjectList = () => {
     const [projectsContext, setProject] = useContext(ProjectContext);

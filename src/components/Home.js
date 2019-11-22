@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Button from './buttons/SubmitButton'
 import DropDown from './buttons/dropdown/DropDown';
-
 import ProjectService from './Projects/services/ProjectService';
+
+import FilteredProjects from './Projects/FilteredProjects';
 
 export default class Home extends Component {
     constructor(props) {
@@ -25,16 +26,19 @@ export default class Home extends Component {
             locations: locations,
             materials: materials,
             categories: categories,
-            inputs: {}
+            inputs: {},
+            filteredProjects: {}
         })
     }
 
     cleanFilledArray = async (list) => {
-        return list.filter(item => {
+        let newList = [];
+        list.forEach((item) => {
             if (item.value !== "Take value") {
-                return item;
+                newList.push(item);
             }
         });
+        return newList;
     }
 
     convertInputsToArray = async (filter) => {
@@ -49,8 +53,16 @@ export default class Home extends Component {
             }
             newList.push(obj);
         }
-
+        
         return await this.cleanFilledArray(newList);
+    }
+
+    assingFilter = async(list) => {
+        let obj = {};
+        list.forEach((item) => {
+                Object.assign(obj, {[item.key]: item.value});
+        });
+        return obj;
     }
 
     handleSubmit = async (e) => {
@@ -64,10 +76,14 @@ export default class Home extends Component {
             material: this.inputMaterialsRef.current.textContent,
             location: this.inputLocationsRef.current.textContent
         }
-
         const cleanCriteria = await this.convertInputsToArray(criteria);
-        const result = await service.filterProjects(cleanCriteria);
-        //todo: show list filtered
+        const preparedFilter = await this.assingFilter(cleanCriteria);
+        
+        const projects = await service.filterProjects(preparedFilter);
+
+        this.setState({
+            filteredProjects: projects.data
+        });
       };
 
     render() {
@@ -96,6 +112,8 @@ export default class Home extends Component {
                     
                     <Button />
                 </form>
+
+                <FilteredProjects projects={this.state.filteredProjects} />
             </>
         )
     }
