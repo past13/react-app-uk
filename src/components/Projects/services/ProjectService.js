@@ -1,6 +1,25 @@
 import axios from 'axios';
 
 export default class ProjectService {
+
+  getPorjects = async() => {
+    try {
+      return (await fetch(`http://localhost:5000/projects/`));
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  getProjectById = async(projectId) => {
+    try {
+      return (await fetch(`http://localhost:5000/projects/${projectId}`)).json();
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   addProject = async (project) => {
     try {
       return await axios.post(`http://localhost:5000/projects/`, project, {});

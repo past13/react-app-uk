@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ProjectService from './services/ProjectService';
 
 class ProjectDetail extends Component {
     constructor(props) {
@@ -7,10 +8,12 @@ class ProjectDetail extends Component {
           projectId: props.id.match.params.id,
           project: {}
         }
+        this.service = new ProjectService();
     }
 
     async componentDidMount() {
-        const project = await (await fetch(`http://localhost:5000/projects/${this.state.projectId}`)).json()
+        const projectId = this.state.projectId;
+        const project = await this.service.getProjectById(projectId);
         if (project) {
             this.setState({ project })
         }

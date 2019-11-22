@@ -8,6 +8,7 @@ export const LocationsProvider = (props)  => {
 
 
  async function fetchData() {
+        //todo: move to service
       const res = await fetch("http://localhost:5000/locations/");
       res
         .json()

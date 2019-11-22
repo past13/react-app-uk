@@ -1,15 +1,17 @@
 import React, { useState, useEffect, createContext } from "react";
-
+import ProjectService from './Projects/services/ProjectService';
 export const ProjectContext = createContext();
 
 export const ProjectsProvider = (props)  => {
-  const  [hasError, setErrors] =  useState(false);
+  const  [setErrors] =  useState(false);
   const  [projects, setProjects ]= useState({});
+  const service = new ProjectService();
+
 
  async function fetchData() {
-      const res = await fetch("http://localhost:5000/projects/");
-      res
-        .json()
+      const projects = await service.getPorjects();
+      projects
+      .json()
         .then(res => setProjects(res))
         .catch(err => setErrors(err));
     }

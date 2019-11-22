@@ -16,6 +16,7 @@ export default class Home extends Component {
     }
     
     async componentDidMount() {
+        //todo: move to service
         const locations = await (await fetch('http://localhost:5000/locations/')).json();
         const materials = await (await fetch('http://localhost:5000/materials/')).json()
         const categories = await (await fetch('http://localhost:5000/categories/')).json()
