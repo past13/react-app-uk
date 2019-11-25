@@ -17,12 +17,12 @@ export default class Home extends Component {
         this.inputMaterialsRef = React.createRef();
         this.inputLocationsRef = React.createRef();
 
-        this.state = {}; 
-
         this.projectService = new ProjectService();
         this.materialService = new MaterialService();
         this.locationService = new LocationService();
         this.categoryService = new CategoryService();
+
+        this.state = {}; 
     }
     
     async componentDidMount() {
@@ -116,7 +116,7 @@ export default class Home extends Component {
                     <DropDown values={materials} ref={this.inputMaterialsRef} />
                     <DropDown values={locations} ref={this.inputLocationsRef} />
                     
-                    <Button />
+                    <Button id={1}/>
                 </form>
 
                 <FilteredProjects projects={this.state.filteredProjects} />

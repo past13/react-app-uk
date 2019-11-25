@@ -1,18 +1,18 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom'; 
 import './App.css';
 
 import NavBar from './pages/NavBar';
-// import Main from './pages/Main';
+import Main from './pages/Main';
 import Footer from './pages/Footer';
 
 function App() {
   return (
-    
-    <div>
+    <BrowserRouter>
       <NavBar />
-      {/* <Main /> */}
-      <Footer />   
-    </div>
+      <Main />
+      <Footer /> 
+    </BrowserRouter>
   );
 }
 

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import DropDown from './../buttons/dropdown/DropDown';
+import Button from './../buttons/SubmitButton'
 
 import ProjectService from './services/ProjectService';
 
@@ -10,7 +12,7 @@ const AddProject = () => {
     const [locationName, setLocation] = useState('');
     const [materialName, setMaterial] = useState('');
     const [categoryName, setCategory] = useState('');
-
+    
     const service = new ProjectService();
 
     const updateName = (e) => {
@@ -61,6 +63,17 @@ const AddProject = () => {
         }
     }
 
+    const actionType = [
+        {
+            _id: 1,
+            name: "Buy"
+        },
+        {
+            _id: 2,
+            name: "Sell"
+        },
+    ];
+
     return (
         <div>
             <form onSubmit={addProject}>
@@ -71,30 +84,32 @@ const AddProject = () => {
                 <label>
                     description
                     <input type="text" name="description" value={description} onChange={updateDescription}/>
-            </label>
-            <label>
-                    phoneNumber
-                    <input type="text" name="phoneNumber" value={phoneNumber} onChange={updatePhoneNumber}/>
-            </label>
-            <label>
-                    email
-                    <input type="text" name="email" value={email} onChange={updateEmail}/>
-            </label>
-            <label>
-                    locationName
-                    <input type="text" name="locationName" value={locationName} onChange={updateLocationName}/>
-            </label>
-            <label>
-                    materialName
-                    <input type="text" name="materialName" value={materialName} onChange={updateMaterialName}/>
-            </label>
-            <label>
-                    categoryName
-                    <input type="text" name="categoryName" value={categoryName} onChange={updateCategoryName}/>
-            </label>
+                </label>
+                <label>
+                        phoneNumber
+                        <input type="text" name="phoneNumber" value={phoneNumber} onChange={updatePhoneNumber}/>
+                </label>
+                <label>
+                        email
+                        <input type="text" name="email" value={email} onChange={updateEmail}/>
+                </label>
+                <label>
+                        locationName
+                        <input type="text" name="locationName" value={locationName} onChange={updateLocationName}/>
+                </label>
+                <label>
+                        materialName
+                        <input type="text" name="materialName" value={materialName} onChange={updateMaterialName}/>
+                </label>
+                <label>
+                        categoryName
+                        <input type="text" name="categoryName" value={categoryName} onChange={updateCategoryName}/>
+                </label>
+
+
+
                 <button>Submit</button>
             </form>
-            <div id="savedResult"></div>
         </div>
     );
 }
