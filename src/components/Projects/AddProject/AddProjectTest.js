@@ -1,30 +1,33 @@
-import React, { Component } from 'react';
-import Button from './buttons/SubmitButton'
-import DropDown from './buttons/dropdown/DropDown';
+import React, { Component, Fragment } from 'react';
+import DropDown from '../../buttons/dropdown/DropDown';
+import Button from '../../buttons/SubmitButton'
 
-import ProjectService from './Projects/services/ProjectService';
-import MaterialService from './Materials/services/MaterialService';
-import LocationService from './Locations/services/LocationService';
-import CategoryService from './Categories/services/CategoryService';
+import MaterialService from '../../Materials/services/MaterialService';
+import LocationService from '../../Locations/services/LocationService';
+import CategoryService from '../../Categories/services/CategoryService';
+import ProjectService from '../services/ProjectService';
 
-import FilteredProjects from './Projects/FilteredProjects';
+import './AddProjectTest.css';
 
-export default class Home extends Component {
+export default class AddProjectTest extends Component {
     constructor(props) {
         super(props);
+        this.state = {}; 
+
         this.inputActionTypeRef = React.createRef();
         this.inputCategoriesRef = React.createRef();      
         this.inputMaterialsRef = React.createRef();
         this.inputLocationsRef = React.createRef();
 
-        this.projectService = new ProjectService();
-        this.materialService = new MaterialService();
         this.locationService = new LocationService();
+        this.materialService = new MaterialService();
         this.categoryService = new CategoryService();
+        this.projectService = new ProjectService();
 
         this.state = {}; 
+
     }
-    
+
     async componentDidMount() {
         const locations = await this.locationService.getLocations();
         const materials = await this.materialService.getMaterials();
@@ -33,10 +36,8 @@ export default class Home extends Component {
         this.setState({ 
             locations: locations,
             materials: materials,
-            categories: categories,
-            inputs: {},
-            filteredProjects: {}
-        })
+            categories: categories
+        });
     }
 
     cleanFilledArray = async (list) => {
@@ -83,16 +84,13 @@ export default class Home extends Component {
             location: this.inputLocationsRef.current.textContent
         }
         const cleanCriteria = await this.convertInputsToArray(criteria);
-        const preparedFilter = await this.assingFilter(cleanCriteria);
+        const projectInput = await this.assingFilter(cleanCriteria);
         
-        const projects = await this.projectService.filterProjects(preparedFilter);
-
-        this.setState({
-            filteredProjects: projects.data
-        });
+        const result = await this.projectService.addProject(projectInput);
     };
 
     render() {
+        
         const actionType = [
             {
                 _id: 1,
@@ -109,18 +107,29 @@ export default class Home extends Component {
         const categories = this.state.categories || [];
         
         return (
-            <>           
-                <form onSubmit={this.handleSubmit}>
-                    <DropDown values={actionType} ref={this.inputActionTypeRef} />
-                    <DropDown values={categories} ref={this.inputCategoriesRef} />
-                    <DropDown values={materials} ref={this.inputMaterialsRef} />
-                    <DropDown values={locations} ref={this.inputLocationsRef} />
-                    
-                    <Button id={1}/>
-                </form>
-
-                <FilteredProjects projects={this.state.filteredProjects} />
-            </>
+            <form onSubmit={this.handleSubmit}>
+                <div>
+                    <div className="dropDownPart"> 
+                        <label>Select your objective</label>
+                        <DropDown values={actionType} ref={this.inputActionTypeRef} />
+                    </div>
+                    <div className="dropDownPart"> 
+                        <label>Product Category</label>
+                        <DropDown values={categories} ref={this.inputCategoriesRef} />
+                    </div>
+                    <div className="dropDownPart"> 
+                        <label>Choose Material</label>
+                        <DropDown values={materials} ref={this.inputMaterialsRef} />
+                    </div>
+                    <div className="dropDownPart"> 
+                        <label>Location</label>
+                        <DropDown values={locations} ref={this.inputLocationsRef} />
+                    </div>
+                </div>
+                <div className="buttonContainer">
+                    <Button />
+                </div>
+            </form>
         )
     }
 }

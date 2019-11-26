@@ -1,0 +1,10 @@
+.dropDownPart {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    margin: 1em;
+}
+
+.buttonContainer {
+    text-align: center;
+}

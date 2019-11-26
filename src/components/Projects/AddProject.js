@@ -106,8 +106,6 @@ const AddProject = () => {
                         <input type="text" name="categoryName" value={categoryName} onChange={updateCategoryName}/>
                 </label>
 
-
-
                 <button>Submit</button>
             </form>
         </div>

@@ -5,13 +5,17 @@ import Home from '../components/Home';
 
 import Projects from '../components/Projects/Projects';
 import ProjectDetail from '../components/Projects/ProjectDetail';
+import AddProjectTest from '../components/Projects/AddProject/AddProjectTest';
+
+import './Main.css';
 
 export default function Main() {
     return (
-        <main>
+        <main className="contentContainer">
             <Switch>
                 <Route exact path="/" render={() => <Home />}/>
                 <Route path="/addProject" render={() => <Projects />}/>
+                <Route path="/addProjectTest" render={() => <AddProjectTest />}/>
                 <Route path="/logaut" render={() => <div>Logout</div>}/>
                 <Route path="/profile" render={() => <div>Profile</div>}/>
                 <Route path='/project/:id' render={(id) => <ProjectDetail id={id} />} />
