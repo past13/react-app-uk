@@ -1,15 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import DropDown from '../../buttons/dropdown/DropDown';
 import Button from '../../buttons/SubmitButton'
 
 import MaterialService from '../../Materials/services/MaterialService';
 import LocationService from '../../Locations/services/LocationService';
 import CategoryService from '../../Categories/services/CategoryService';
-import ProjectService from '../services/ProjectService';
 
-import './AddProjectTest.css';
+import ProjectEdit from './../EditProject/ProjectEdit';
 
-export default class AddProjectTest extends Component {
+import './AddProject.css';
+
+export default class AddProject extends Component {
     constructor(props) {
         super(props);
         this.state = {}; 
@@ -22,10 +23,8 @@ export default class AddProjectTest extends Component {
         this.locationService = new LocationService();
         this.materialService = new MaterialService();
         this.categoryService = new CategoryService();
-        this.projectService = new ProjectService();
 
         this.state = {}; 
-
     }
 
     async componentDidMount() {
@@ -36,7 +35,8 @@ export default class AddProjectTest extends Component {
         this.setState({ 
             locations: locations,
             materials: materials,
-            categories: categories
+            categories: categories,
+            toDashboard: false
         });
     }
 
@@ -85,8 +85,11 @@ export default class AddProjectTest extends Component {
         }
         const cleanCriteria = await this.convertInputsToArray(criteria);
         const projectInput = await this.assingFilter(cleanCriteria);
-        
-        const result = await this.projectService.addProject(projectInput);
+
+        this.setState({
+            toDashboard: true,
+            savedProject: projectInput
+        })
     };
 
     render() {
@@ -106,30 +109,34 @@ export default class AddProjectTest extends Component {
         const materials = this.state.materials || [];
         const categories = this.state.categories || [];
         
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <div className="dropDownPart"> 
-                        <label>Select your objective</label>
-                        <DropDown values={actionType} ref={this.inputActionTypeRef} />
+        if (this.state.toDashboard === true) {
+            return <ProjectEdit data={this.state}/>
+        } else {
+            return (
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <div className="dropDownPart"> 
+                            <label>Select your objective</label>
+                            <DropDown values={actionType} ref={this.inputActionTypeRef} />
+                        </div>
+                        <div className="dropDownPart"> 
+                            <label>Product Category</label>
+                            <DropDown values={categories} ref={this.inputCategoriesRef} />
+                        </div>
+                        <div className="dropDownPart"> 
+                            <label>Choose Material</label>
+                            <DropDown values={materials} ref={this.inputMaterialsRef} />
+                        </div>
+                        <div className="dropDownPart"> 
+                            <label>Location</label>
+                            <DropDown values={locations} ref={this.inputLocationsRef} />
+                        </div>
                     </div>
-                    <div className="dropDownPart"> 
-                        <label>Product Category</label>
-                        <DropDown values={categories} ref={this.inputCategoriesRef} />
+                    <div className="buttonContainer">
+                        <Button />
                     </div>
-                    <div className="dropDownPart"> 
-                        <label>Choose Material</label>
-                        <DropDown values={materials} ref={this.inputMaterialsRef} />
-                    </div>
-                    <div className="dropDownPart"> 
-                        <label>Location</label>
-                        <DropDown values={locations} ref={this.inputLocationsRef} />
-                    </div>
-                </div>
-                <div className="buttonContainer">
-                    <Button />
-                </div>
-            </form>
-        )
+                </form>
+            )
+        }
     }
 }

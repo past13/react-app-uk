@@ -8,13 +8,13 @@ export default function NavBar() {
         <nav className="navigationContainer">
             <ul>
                 <li>
-                    <Link to="/addProjectTest">addProjectTest</Link>
+                    <Link to="/addProject">Add project</Link>
                 </li>
                 <li>
                     <Link to="/">Home</Link>
                 </li>
                 <li>
-                    <Link to="/addProject">Add Project</Link>
+                    <Link to="/projects">Projects</Link>
                 </li>
                 <li>
                     <Link to="/logaut">Logout</Link>

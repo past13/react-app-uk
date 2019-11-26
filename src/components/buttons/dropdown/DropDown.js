@@ -38,7 +38,7 @@ class DropDown extends Component {
         return (
             <Dropdown>
                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                    <Button id="ddllocation" type="text" ref={this.props.innerRef}>{this.state.targetValue !== "" ? this.state.targetValue : "Take value"}</Button>
+                    <Button id="ddllocation" type="text" ref={this.props.innerRef}>{this.state.targetValue !== "" ? this.state.targetValue : this.props.values[0].name}</Button>
                 </Dropdown.Toggle>
                 <Dropdown.Menu as={CustomMenu}>
                     {values.map(item => (

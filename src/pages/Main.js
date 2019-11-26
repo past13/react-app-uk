@@ -5,7 +5,7 @@ import Home from '../components/Home';
 
 import Projects from '../components/Projects/Projects';
 import ProjectDetail from '../components/Projects/ProjectDetail';
-import AddProjectTest from '../components/Projects/AddProject/AddProjectTest';
+import AddProject from '../components/Projects/AddProject/AddProject';
 
 import './Main.css';
 
@@ -14,10 +14,11 @@ export default function Main() {
         <main className="contentContainer">
             <Switch>
                 <Route exact path="/" render={() => <Home />}/>
-                <Route path="/addProject" render={() => <Projects />}/>
-                <Route path="/addProjectTest" render={() => <AddProjectTest />}/>
+                <Route path="/addProject" render={() => <AddProject/>}/>
                 <Route path="/logaut" render={() => <div>Logout</div>}/>
                 <Route path="/profile" render={() => <div>Profile</div>}/>
+                <Route path="/projects" render={() => <Projects/>}/>
+                
                 <Route path='/project/:id' render={(id) => <ProjectDetail id={id} />} />
                 <Route render={() => <Notfound />} />
             </Switch>
