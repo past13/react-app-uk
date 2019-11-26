@@ -8,7 +8,7 @@ div .uploadPhotoPlaceHolder {
     background-color: rgba(206, 205, 205, 0.897); 
 }
 
-.descriptionTextArea {
+.descriptionInput {
     width: 450px;
     min-height: 30px;
     max-height: 200px;
@@ -16,6 +16,20 @@ div .uploadPhotoPlaceHolder {
 }
 
 .phoneNumberInput {
+    width: 400px;
+    height: 30px;
+    resize: none;
+    background-color: rgba(206, 205, 205, 0.897); 
+}
+
+.emailInput {
+    width: 400px;
+    height: 30px;
+    resize: none;
+    background-color: rgba(206, 205, 205, 0.897); 
+}
+
+.nameInput {
     width: 400px;
     height: 30px;
     resize: none;
