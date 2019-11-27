@@ -17,9 +17,6 @@ export default function NavBar() {
                     <Link to="/projects">Projects</Link>
                 </li>
                 <li>
-                    <Link to="/logaut">Logout</Link>
-                </li>
-                <li>
                     <Link to="/profile">Profile</Link>
                 </li>
             </ul>
