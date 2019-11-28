@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
 import { NavigationBar } from './pages/NavigationBar';
 import { Layout } from './pages/Layout';
+import { Footer } from './pages/Footer';
 import Notfound from './components/Notfound';
 
 import Profile from './components/Login/Profile';
@@ -25,6 +26,7 @@ class App extends Component {
               </Switch>
             </Router>
           </Layout>
+          <Footer />
         </React.Fragment>
     );
   }

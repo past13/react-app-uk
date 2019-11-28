@@ -1,10 +1,8 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
 
-export default function Footer() {
-
-    return(
-        <footer>
-           Footer
-        </footer>
-    ) 
-}
+export const Footer = () => (
+    <Container>
+        Footer
+    </Container>
+)
