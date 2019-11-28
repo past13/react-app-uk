@@ -8,6 +8,7 @@ import ProjectDetail from '../components/Projects/ProjectDetail';
 import AddProject from '../components/Projects/AddProject/AddProject';
 
 import Profile from '../components/Login/Profile';
+import Login from '../components/Login/Login';
 
 import './Main.css';
 
@@ -16,9 +17,11 @@ export default function Main() {
         <main className="contentContainer">
             <Switch>
                 <Route exact path="/" render={() => <Home />}/>
-                <Route path="/addProject" render={() => <AddProject/>}/>
+                <Route path="/login" render={() => <Login />}/>
+
+                <Route path="/addProject" render={() => <AddProject />}/>
                 <Route path="/profile" render={() => <Profile />}/>
-                <Route path="/projects" render={() => <Projects/>}/>
+                <Route path="/projects" render={() => <Projects />}/>
                 
                 <Route path='/project/:id' render={(id) => <ProjectDetail id={id} />} />
                 <Route render={() => <Notfound />} />
