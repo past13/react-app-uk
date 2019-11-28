@@ -1,19 +1,33 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom'; 
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
+import { NavigationBar } from './pages/NavigationBar';
+import { Layout } from './pages/Layout';
+import Notfound from './components/Notfound';
+
+import Profile from './components/Login/Profile';
+import Login from './components/Login/Login';
+import Projects from './components/Projects/Projects';
+
 import './App.css';
 
-import NavBar from './pages/NavBar';
-import Main from './pages/Main';
-import Footer from './pages/Footer';
-
-function App() {
-  return (
-    <BrowserRouter>
-      <NavBar />
-      <Main />
-      <Footer /> 
-    </BrowserRouter>
-  );
+class App extends Component {
+  render() {
+    return (
+        <React.Fragment>
+          <NavigationBar />
+          <Layout>
+            <Router>
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <Route path="/projects" component={Projects} />
+                <Route path="/profile" component={Profile} />
+                <Route component={Notfound} />
+              </Switch>
+            </Router>
+          </Layout>
+        </React.Fragment>
+    );
+  }
 }
 
 export default App;
