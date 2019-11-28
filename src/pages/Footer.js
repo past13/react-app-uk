@@ -1,8 +1,17 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
+import styled from 'styled-components';
+
+const Styles = styled.div`
+    footer {
+        align-content:flex-start;
+    }
+
+`;
 
 export const Footer = () => (
-    <Container>
-        Footer
-    </Container>
+    <Styles>
+        <footer>
+            Footer
+        </footer>
+    </Styles>
 )

@@ -14,7 +14,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-        <React.Fragment>
+        <div id="main-color">
           <NavigationBar />
           <Layout>
             <Router>
@@ -27,7 +27,7 @@ class App extends Component {
             </Router>
           </Layout>
           <Footer />
-        </React.Fragment>
+        </div>
     );
   }
 }
