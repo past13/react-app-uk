@@ -5,10 +5,8 @@ import ProjectList from './ProjectList';
 export default function Projects() {
 
     return(
-        <main>
-            <ProjectsProvider>
-                <ProjectList />
-            </ProjectsProvider>
-        </main>
+        <ProjectsProvider>
+            <ProjectList />
+        </ProjectsProvider>
     ) 
 }

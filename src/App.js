@@ -8,6 +8,8 @@ import Notfound from './components/Notfound';
 import Profile from './components/Login/Profile';
 import Login from './components/Login/Login';
 import Projects from './components/Projects/Projects';
+import AddProject from './components/Projects/AddProject/AddProject';
+import ProjectDetail from './components/Projects/ProjectDetail';
 
 import './App.css';
 
@@ -22,6 +24,8 @@ class App extends Component {
                 <Route exact path="/" component={Login} />
                 <Route path="/projects" component={Projects} />
                 <Route path="/profile" component={Profile} />
+                <Route path="/addProject" component={AddProject} />
+                <Route path='/project/:id' render={(id) => <ProjectDetail id={id} />} />
                 <Route component={Notfound} />
               </Switch>
             </Router>
