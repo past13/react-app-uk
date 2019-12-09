@@ -7,7 +7,8 @@ export default function Login() {
     return ( 
         <Fragment>
             <div className="logo">LOGO</div> 
-            <div className="login-container"><div className="logo"></div> 
+            <div className="login-container">
+                <div className="logo"></div> 
             <div className="fields"> 
                 <div className="email"> 
                     <div className="email-label">
