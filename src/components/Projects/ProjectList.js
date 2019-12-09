@@ -92,7 +92,6 @@ const ProjectList = () => {
 
     return (
         <Styles>
-            
             <div className="box-container">
             <div className="box-title">Your list</div>
                 {projectList === null ? (

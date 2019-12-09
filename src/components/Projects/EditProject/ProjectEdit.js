@@ -28,6 +28,13 @@ class ProjectEdit extends Component {
         }
     }
 
+    async componentDidMount() {
+        if (!this.props.data.toSaveForm) {
+            const result = await this.projectService.getProjectById(this.props.data.match.params.id);
+            
+        }
+    }
+
     handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -49,6 +56,7 @@ class ProjectEdit extends Component {
     }
 
     render() {
+
         const updateName = (e) => {
             const valid = true;
             if (valid) {
@@ -87,38 +95,38 @@ class ProjectEdit extends Component {
 
         return (
             <>
-            <form onSubmit={this.handleSubmit}>
-                <div className="uploadPhotoContainer">
-                    <div>Upload your photos</div>
-                    <div className="uploadPhotoPlaceHolder"></div>
-                    <div className="uploadPhotoPlaceHolder"></div>
-                    <div className="uploadPhotoPlaceHolder"></div>
-                    <div className="uploadPhotoPlaceHolder"></div>
-                    <div className="uploadPhotoPlaceHolder"></div>
-                </div>
-                <div>
-                    <div>Project name</div>
-                    <textarea className="nameInput" onChange={updateName}></textarea>
-                </div>
-                <div>
-                    <div>Description</div>
-                    <textarea className="descriptionInput" onChange={updateDescription}></textarea>
-                </div>
-                <div>
-                    <div>Your mobile number</div>
-                    <textarea className="phoneNumberInput" onChange={updatePhoneNumber}></textarea>
-                </div>
-                <div>
-                    <div>Your email</div>
-                    <textarea className="emailInput" onChange={updateEmail}></textarea>
-                </div>
-                <div>
-                    <div>Post on: 2000.01.01</div>
-                </div>
-                <div className="buttonContainer">
-                    <Button />
-                </div>
-            </form>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="uploadPhotoContainer">
+                        <div>Upload your photos</div>
+                        <div className="uploadPhotoPlaceHolder"></div>
+                        <div className="uploadPhotoPlaceHolder"></div>
+                        <div className="uploadPhotoPlaceHolder"></div>
+                        <div className="uploadPhotoPlaceHolder"></div>
+                        <div className="uploadPhotoPlaceHolder"></div>
+                    </div>
+                    <div>
+                        <div>Project name</div>
+                        <textarea className="nameInput" value={this.state} onChange={updateName}></textarea>
+                    </div>
+                    <div>
+                        <div>Description</div>
+                        <textarea className="descriptionInput" onChange={updateDescription}></textarea>
+                    </div>
+                    <div>
+                        <div>Your mobile number</div>
+                        <textarea className="phoneNumberInput" onChange={updatePhoneNumber}></textarea>
+                    </div>
+                    <div>
+                        <div>Your email</div>
+                        <textarea className="emailInput" onChange={updateEmail}></textarea>
+                    </div>
+                    <div>
+                        <div>Post on: 2000.01.01</div>
+                    </div>
+                    <div className="buttonContainer">
+                        <Button />
+                    </div>
+                </form>
             </>
         )
     }

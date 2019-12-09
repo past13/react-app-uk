@@ -4,11 +4,11 @@ import Notfound from '../components/Notfound';
 import Home from '../components/Home';
 
 import Projects from '../components/Projects/Projects';
-import ProjectDetail from '../components/Projects/ProjectDetail';
 import AddProject from '../components/Projects/AddProject/AddProject';
 
 import Profile from '../components/Login/Profile';
 import Login from '../components/Login/Login';
+import ProjectEdit from '../components/Projects/EditProject/ProjectEdit';
 
 import './Main.css';
 
@@ -23,7 +23,7 @@ export default function Main() {
                 <Route path="/profile" render={() => <Profile />}/>
                 <Route path="/projects" render={() => <Projects />}/>
                 
-                <Route path='/project/:id' render={(id) => <ProjectDetail id={id} />} />
+                <Route path='/project/:id' render={(id) => <ProjectEdit id={id} />} />
                 <Route render={() => <Notfound />} />
             </Switch>
         </main>

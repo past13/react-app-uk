@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default class ProjectService {
 
-  getPorjects = async() => {
+  getPorjects = async () => {
     try {
       return (await fetch(`http://localhost:5000/projects/`));
     }
@@ -11,7 +11,7 @@ export default class ProjectService {
     }
   }
 
-  getProjectById = async(projectId) => {
+  getProjectById = async (projectId) => {
     try {
       return (await fetch(`http://localhost:5000/projects/${projectId}`)).json();
     }
@@ -38,7 +38,7 @@ export default class ProjectService {
     }
   }
 
-  filterProjects = async(filter) => {
+  filterProjects = async (filter) => {
     try {
       return await axios.post(`http://localhost:5000/filterProjects/`, filter, {});
     }

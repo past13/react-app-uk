@@ -23,8 +23,6 @@ export default class AddProject extends Component {
         this.locationService = new LocationService();
         this.materialService = new MaterialService();
         this.categoryService = new CategoryService();
-
-        this.state = {}; 
     }
 
     async componentDidMount() {
@@ -36,7 +34,7 @@ export default class AddProject extends Component {
             locations: locations,
             materials: materials,
             categories: categories,
-            toDashboard: false
+            toSaveForm: false
         });
     }
 
@@ -87,13 +85,12 @@ export default class AddProject extends Component {
         const projectInput = await this.assingFilter(cleanCriteria);
 
         this.setState({
-            toDashboard: true,
+            toSaveForm: true,
             savedProject: projectInput
         })
     };
 
     render() {
-        
         const actionType = [
             {
                 _id: 1,
@@ -109,7 +106,7 @@ export default class AddProject extends Component {
         const materials = this.state.materials || [];
         const categories = this.state.categories || [];
         
-        if (this.state.toDashboard === true) {
+        if (this.state.toSaveForm === true) {
             return <ProjectEdit data={this.state}/>
         } else {
             return (
