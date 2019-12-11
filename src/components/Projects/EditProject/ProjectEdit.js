@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Button from '../../buttons/SubmitButton'
 
 import ProjectService from '../services/ProjectService';
 import { withRouter } from 'react-router-dom';
+
+import FormInput from './../FormInput';
 
 import './ProjectEdit.css';
 
@@ -30,103 +31,17 @@ class ProjectEdit extends Component {
 
     async componentDidMount() {
         if (!this.props.data.toSaveForm) {
-            const result = await this.projectService.getProjectById(this.props.data.match.params.id);
-            
-        }
-    }
-
-    handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const project = {
-            categoryName: this.state.projectInput.category,
-            description: this.state.description,
-            email: this.state.email,
-            locationName: this.state.projectInput.location,
-            materialName: this.state.projectInput.material,
-            name: this.state.name,
-            phoneNumber: this.state.phoneNumber,
-            type: this.state.projectInput.actionType
-        }
-
-        const result = await this.projectService.addProject(project);
-        if (result.status === 200) {
-            this.redirectToProjects();
+            const project = await this.projectService.getProjectById(this.props.data.match.params.id);
+            this.setState({
+                project: project
+            })
         }
     }
 
     render() {
-
-        const updateName = (e) => {
-            const valid = true;
-            if (valid) {
-                this.setState({
-                    name: e.target.value
-                })
-            }
-        }
-
-        const updateDescription = (e) => {
-            const valid = true;
-            if (valid) {
-                this.setState({
-                    description: e.target.value
-                })
-            }
-        }
-
-        const updatePhoneNumber = (e) => {
-            const valid = true;
-            if (valid) {
-                this.setState({
-                    phoneNumber: e.target.value
-                })
-            }
-        }
-
-        const updateEmail = (e) => {
-            const valid = true;
-            if (valid) {
-                this.setState({
-                    email: e.target.value
-                })
-            }
-        }
-
         return (
             <>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="uploadPhotoContainer">
-                        <div>Upload your photos</div>
-                        <div className="uploadPhotoPlaceHolder"></div>
-                        <div className="uploadPhotoPlaceHolder"></div>
-                        <div className="uploadPhotoPlaceHolder"></div>
-                        <div className="uploadPhotoPlaceHolder"></div>
-                        <div className="uploadPhotoPlaceHolder"></div>
-                    </div>
-                    <div>
-                        <div>Project name</div>
-                        <textarea className="nameInput" value={this.state} onChange={updateName}></textarea>
-                    </div>
-                    <div>
-                        <div>Description</div>
-                        <textarea className="descriptionInput" onChange={updateDescription}></textarea>
-                    </div>
-                    <div>
-                        <div>Your mobile number</div>
-                        <textarea className="phoneNumberInput" onChange={updatePhoneNumber}></textarea>
-                    </div>
-                    <div>
-                        <div>Your email</div>
-                        <textarea className="emailInput" onChange={updateEmail}></textarea>
-                    </div>
-                    <div>
-                        <div>Post on: 2000.01.01</div>
-                    </div>
-                    <div className="buttonContainer">
-                        <Button />
-                    </div>
-                </form>
+                {this.state.project !== undefined ? <FormInput project={this.state.project} /> : <FormInput />}
             </>
         )
     }
