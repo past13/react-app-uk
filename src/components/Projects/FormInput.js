@@ -35,14 +35,11 @@ const FormInput = ({project}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        //todo: split add and update methods
         if (state.saveType === 'add') {
-            console.log(1); 
             // const result = await this.projectService.addProject(state);
         } 
 
         if (state.saveType === 'update') {
-            console.log(2); 
             // const result = await this.projectService.updateProject(state);
         }
 
