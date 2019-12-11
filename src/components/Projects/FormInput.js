@@ -1,4 +1,4 @@
-import React, { useEffect, setState, useState } from "react";
+import React, { useEffect } from "react";
 import Button from '../buttons/SubmitButton'
 
 const FormInput = ({project}) => {
@@ -8,13 +8,16 @@ const FormInput = ({project}) => {
     useEffect(() => {
         if (project !== undefined) {
             setState({ 
-                name: project.name,
+                categoryName: project.name,
                 phoneNumber: project.phoneNumber,
                 description: project.description,
-                category: project.category.name,   
                 email: project.email, 
+                type: project.type,
+                materialName: project.material.name,
+                category: project.category.name,
+                locationName: project.location.name,   
                 createdAt: project.createdAt,
-                project: project
+                updatedAt: project.updatedAt,
             });
         }
     }, [project]);
@@ -22,61 +25,19 @@ const FormInput = ({project}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const project = {
-            categoryName: this.state.projectInput.category,
-            description: this.state.description,
-            email: this.state.email,
-            locationName: this.state.projectInput.location,
-            materialName: this.state.projectInput.material,
-            name: this.state.name,
-            phoneNumber: this.state.phoneNumber,
-            type: this.state.projectInput.actionType,
-            project: ''
-        }
-
-        const result = await this.projectService.addProject(project);
-        if (result.status === 200) {
-            this.redirectToProjects();
-        }
+        // const result = await this.projectService.addProject(state);
+        // if (result.status === 200) {
+        //     this.redirectToProjects();
+        // }
     }
 
-    const updateName = (e) => {
-        const valid = true;
-        if (valid) {
-            this.setState({
-                name: e.target.value
-            })
-        }
-    }
-
-    const updateDescription = (e) => {
-        const valid = true;
-        if (valid) {
-            this.setState({
-                description: e.target.value
-            })
-        }
-    }
-
-    const updatePhoneNumber = (e) => {
-        const valid = true;
-        if (valid) {
-            this.setState({
-                phoneNumber: e.target.value
-            })
-        }
-    }
-
-    const updateEmail = (e) => {
-        const valid = true;
-        if (valid) {
-            this.setState({
-                email: e.target.value
-            })
-        }
-    }
-
-    console.log(state)
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setState({
+            ...state,
+            [e.target.name]: value
+        });
+      }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -90,19 +51,19 @@ const FormInput = ({project}) => {
             </div>
             <div>
                 <div>Project name</div>
-                <textarea className="nameInput" value={state.name} onChange={updateName}></textarea>
+                <textarea className="nameInput" name="name" value={state.name} onChange={handleChange}></textarea>
             </div>
             <div>
                 <div>Description</div>
-                <textarea className="descriptionInput" value={state.description} onChange={updateDescription}></textarea>
+                <textarea className="descriptionInput" name="description" value={state.description} onChange={handleChange}></textarea>
             </div>
             <div>
                 <div>Your mobile number</div>
-                <textarea className="phoneNumberInput" value={state.phoneNumber} onChange={updatePhoneNumber}></textarea>
+                <textarea className="phoneNumberInput" name="phoneNumber" value={state.phoneNumber} onChange={handleChange}></textarea>
             </div>
             <div>
                 <div>Your email</div>
-                <textarea className="emailInput" value={state.email} onChange={updateEmail}></textarea>
+                <textarea className="emailInput" name="email" value={state.email} onChange={handleChange}></textarea>
             </div>
             <div>
                 <div>Created date</div>

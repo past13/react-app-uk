@@ -24,7 +24,8 @@ class App extends Component {
                 <Route exact path="/" component={Login} />
                 <Route path="/projects" component={Projects} />
                 <Route path="/profile" component={Profile} />
-                <Route path="/addProject" component={AddProject} />
+                <Route path="/submitProject" component={AddProject} />
+                <Route path='/addProject' component={ProjectEdit} />
                 <Route path='/project/:id' render={(id) => <ProjectEdit data={id} />} />
                 <Route component={Notfound} />
               </Switch>

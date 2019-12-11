@@ -33,8 +33,7 @@ export default class AddProject extends Component {
         this.setState({ 
             locations: locations,
             materials: materials,
-            categories: categories,
-            toSaveForm: false
+            categories: categories
         });
     }
 
@@ -67,7 +66,7 @@ export default class AddProject extends Component {
     assingFilter = async(list) => {
         let obj = {};
         list.forEach((item) => {
-                Object.assign(obj, {[item.key]: item.value});
+            Object.assign(obj, {[item.key]: item.value});
         });
         return obj;
     }
@@ -75,19 +74,18 @@ export default class AddProject extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
 
-        const criteria = {
+        const dropDownList = {
             actionType: this.inputActionTypeRef.current.textContent,
             category: this.inputCategoriesRef.current.textContent,
             material: this.inputMaterialsRef.current.textContent,
-            location: this.inputLocationsRef.current.textContent
+            location: this.inputLocationsRef.current.textContent,
+            toSaveForm: true
         }
-        const cleanCriteria = await this.convertInputsToArray(criteria);
-        const projectInput = await this.assingFilter(cleanCriteria);
 
-        this.setState({
-            toSaveForm: true,
-            savedProject: projectInput
-        })
+        // const cleanCriteria = await this.convertInputsToArray(criteria);
+        // const projectInput = await this.assingFilter(cleanCriteria);
+       
+        this.props.history.push("/addProject", { inputData: dropDownList });
     };
 
     render() {
@@ -105,35 +103,31 @@ export default class AddProject extends Component {
         const locations = this.state.locations || [];
         const materials = this.state.materials || [];
         const categories = this.state.categories || [];
-        
-        if (this.state.toSaveForm === true) {
-            return <ProjectEdit data={this.state}/>
-        } else {
-            return (
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <div className="dropDownPart"> 
-                            <label>Select your objective</label>
-                            <DropDown values={actionType} ref={this.inputActionTypeRef} />
-                        </div>
-                        <div className="dropDownPart"> 
-                            <label>Product Category</label>
-                            <DropDown values={categories} ref={this.inputCategoriesRef} />
-                        </div>
-                        <div className="dropDownPart"> 
-                            <label>Choose Material</label>
-                            <DropDown values={materials} ref={this.inputMaterialsRef} />
-                        </div>
-                        <div className="dropDownPart"> 
-                            <label>Location</label>
-                            <DropDown values={locations} ref={this.inputLocationsRef} />
-                        </div>
+      
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <div>
+                    <div className="dropDownPart"> 
+                        <label>Select your objective</label>
+                        <DropDown values={actionType} ref={this.inputActionTypeRef} />
                     </div>
-                    <div className="buttonContainer">
-                        <Button />
+                    <div className="dropDownPart"> 
+                        <label>Product Category</label>
+                        <DropDown values={categories} ref={this.inputCategoriesRef} />
                     </div>
-                </form>
-            )
-        }
+                    <div className="dropDownPart"> 
+                        <label>Choose Material</label>
+                        <DropDown values={materials} ref={this.inputMaterialsRef} />
+                    </div>
+                    <div className="dropDownPart"> 
+                        <label>Location</label>
+                        <DropDown values={locations} ref={this.inputLocationsRef} />
+                    </div>
+                </div>
+                <div className="buttonContainer">
+                    <Button />
+                </div>
+            </form>
+        )
     }
 }

@@ -16,26 +16,25 @@ class ProjectEdit extends Component {
             name: '',
             type:'',
             email: '',
-            projectInput: this.props.data.savedProject
         }; 
 
         this.projectService = new ProjectService();
     }
 
-    redirectToProjects = () => {
-        const { history } = this.props;
-        if (history) {
-            history.push('/projects');
-        }
-    }
-
     async componentDidMount() {
-        if (!this.props.data.toSaveForm) {
-            const project = await this.projectService.getProjectById(this.props.data.match.params.id);
-            this.setState({
-                project: project
-            })
+
+        if (this.props.match.path === '/addProject') {
+            console.log('Yes');
+        } else {
+            console.log('No');
         }
+
+        // if (!this.props.data.toSaveForm) {
+        //     const project = await this.projectService.getProjectById(this.props.data.match.params.id);
+        //     this.setState({
+        //         project: project
+        //     })
+        // }
     }
 
     render() {

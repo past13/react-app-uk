@@ -19,7 +19,10 @@ export default function Main() {
                 <Route exact path="/" render={() => <Home />}/>
                 <Route path="/login" render={() => <Login />}/>
 
-                <Route path="/addProject" render={() => <AddProject />}/>
+                <Route path="/submitProject" render={() => <AddProject />}/>
+                <Route path="/addProject" render={() => <ProjectEdit />}/>
+
+
                 <Route path="/profile" render={() => <Profile />}/>
                 <Route path="/projects" render={() => <Projects />}/>
                 

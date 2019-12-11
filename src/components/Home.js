@@ -68,7 +68,7 @@ export default class Home extends Component {
     assingFilter = async(list) => {
         let obj = {};
         list.forEach((item) => {
-                Object.assign(obj, {[item.key]: item.value});
+            Object.assign(obj, {[item.key]: item.value});
         });
         return obj;
     }
