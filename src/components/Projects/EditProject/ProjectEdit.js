@@ -22,25 +22,22 @@ class ProjectEdit extends Component {
     }
 
     async componentDidMount() {
-
         if (this.props.match.path === '/addProject') {
-            console.log('Yes');
+            this.setState({
+                inputData: this.props.location.state.inputData
+            })
         } else {
-            console.log('No');
+            const project = await this.projectService.getProjectById(this.props.data.match.params.id);
+            this.setState({
+                project: project
+            })
         }
-
-        // if (!this.props.data.toSaveForm) {
-        //     const project = await this.projectService.getProjectById(this.props.data.match.params.id);
-        //     this.setState({
-        //         project: project
-        //     })
-        // }
     }
 
     render() {
         return (
             <>
-                {this.state.project !== undefined ? <FormInput project={this.state.project} /> : <FormInput />}
+                {this.state.project !== undefined ? <FormInput project={this.state.project} /> : <FormInput project={this.state.inputData} />}
             </>
         )
     }

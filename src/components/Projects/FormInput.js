@@ -2,30 +2,50 @@ import React, { useEffect } from "react";
 import Button from '../buttons/SubmitButton'
 
 const FormInput = ({project}) => {
-    
     const [state, setState] = React.useState({});
 
-    useEffect(() => {
+    useEffect(() => {        
         if (project !== undefined) {
-            setState({ 
-                categoryName: project.name,
-                phoneNumber: project.phoneNumber,
-                description: project.description,
-                email: project.email, 
-                type: project.type,
-                materialName: project.material.name,
-                category: project.category.name,
-                locationName: project.location.name,   
-                createdAt: project.createdAt,
-                updatedAt: project.updatedAt,
-            });
+            if (project.toSaveForm) {
+                setState({
+                    type: project.actionType,
+                    categoryName: project.category,
+                    materialName: project.material,
+                    locationName: project.location,
+                    saveType: 'add'
+                });
+            } else {
+                setState({ 
+                    materialName: project.material.name,
+                    category: project.category.name,
+                    locationName: project.location.name,   
+                    categoryName: project.name,
+                    phoneNumber: project.phoneNumber,
+                    description: project.description,
+                    email: project.email, 
+                    type: project.type,
+                    createdAt: project.createdAt,
+                    updatedAt: project.updatedAt,
+                    saveType: 'update'
+                });
+            }
         }
     }, [project]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // const result = await this.projectService.addProject(state);
+        //todo: split add and update methods
+        if (state.saveType === 'add') {
+            console.log(1); 
+            // const result = await this.projectService.addProject(state);
+        } 
+
+        if (state.saveType === 'update') {
+            console.log(2); 
+            // const result = await this.projectService.updateProject(state);
+        }
+
         // if (result.status === 200) {
         //     this.redirectToProjects();
         // }

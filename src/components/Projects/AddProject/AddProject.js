@@ -6,8 +6,6 @@ import MaterialService from '../../Materials/services/MaterialService';
 import LocationService from '../../Locations/services/LocationService';
 import CategoryService from '../../Categories/services/CategoryService';
 
-import ProjectEdit from './../EditProject/ProjectEdit';
-
 import './AddProject.css';
 
 export default class AddProject extends Component {
@@ -37,40 +35,6 @@ export default class AddProject extends Component {
         });
     }
 
-    cleanFilledArray = async (list) => {
-        let newList = [];
-        list.forEach((item) => {
-            if (item.value !== "Take value") {
-                newList.push(item);
-            }
-        });
-        return newList;
-    }
-
-    convertInputsToArray = async (filter) => {
-        const inputValues = Object.values(filter);
-        const inputKeys = Object.keys(filter);
-        
-        let newList = [];
-        for (let i = 0; i < inputKeys.length; i++) { 
-            let obj = {
-                key: inputKeys[i],
-                value: inputValues[i]
-            }
-            newList.push(obj);
-        }
-        
-        return await this.cleanFilledArray(newList);
-    }
-
-    assingFilter = async(list) => {
-        let obj = {};
-        list.forEach((item) => {
-            Object.assign(obj, {[item.key]: item.value});
-        });
-        return obj;
-    }
-
     handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -82,9 +46,6 @@ export default class AddProject extends Component {
             toSaveForm: true
         }
 
-        // const cleanCriteria = await this.convertInputsToArray(criteria);
-        // const projectInput = await this.assingFilter(cleanCriteria);
-       
         this.props.history.push("/addProject", { inputData: dropDownList });
     };
 
