@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 const FormInput = ({project}) => {
     const [state, setState] = React.useState({});
     let history = useHistory();
-    
     const projectService = new ProjectService();
 
     useEffect(() => {        
@@ -21,6 +20,7 @@ const FormInput = ({project}) => {
                 });
             } else {
                 setState({ 
+                    id: project._id,
                     materialName: project.material.name,
                     category: project.category.name,
                     locationName: project.location.name,   
@@ -53,9 +53,9 @@ const FormInput = ({project}) => {
             result = await projectService.updateProject(state);
         }
 
-        // if (result.status === 200) {
-        //     redirectToProjects();
-        // }
+        if (result.status === 200) {
+            redirectToProjects();
+        }
     }
 
     const handleChange = (e) => {
@@ -68,6 +68,7 @@ const FormInput = ({project}) => {
 
     return (
         <form onSubmit={handleSubmit}>
+
             <div className="uploadPhotoContainer">
                 <div>Upload your photos</div>
                 <div className="uploadPhotoPlaceHolder"></div>

@@ -30,9 +30,9 @@ export default class ProjectService {
   };
 
   updateProject = async (project) => {
+    const { id } = project;
     try {
-      console.log(project);
-      return await axios.put(`http://localhost:5000/projects/`, project, {});
+      return await axios.put(`http://localhost:5000/projects/${id}`, project, {});
     }
     catch (error) {
       console.log(error);
