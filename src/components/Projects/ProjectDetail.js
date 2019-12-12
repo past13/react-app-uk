@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ProjectService from './services/ProjectService';
 
 class ProjectDetail extends Component {
     constructor(props) {
@@ -8,7 +7,6 @@ class ProjectDetail extends Component {
           projectId: props.id.match.params.id,
           project: {}
         }
-        this.service = new ProjectService();
     }
 
     async componentDidMount() {
@@ -26,7 +24,7 @@ class ProjectDetail extends Component {
 
         return (
             <div>
-                <div>{project.name}</div>
+                <div>{project.projectName}</div>
                 <div>{project.phoneNumber}</div>
                 <div>{project.email}</div>
                 <div>{project.description}</div>

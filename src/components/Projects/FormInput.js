@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 import Button from '../buttons/SubmitButton'
+import ProjectService from './services/ProjectService';
+import { useHistory } from "react-router-dom";
 
 const FormInput = ({project}) => {
     const [state, setState] = React.useState({});
+    let history = useHistory();
+    
+    const projectService = new ProjectService();
 
     useEffect(() => {        
         if (project !== undefined) {
@@ -19,7 +24,7 @@ const FormInput = ({project}) => {
                     materialName: project.material.name,
                     category: project.category.name,
                     locationName: project.location.name,   
-                    categoryName: project.name,
+                    projectName: project.projectName,
                     phoneNumber: project.phoneNumber,
                     description: project.description,
                     email: project.email, 
@@ -32,19 +37,24 @@ const FormInput = ({project}) => {
         }
     }, [project]);
 
+    const redirectToProjects = async () => {
+        history.push("/projects");
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        let result;
         if (state.saveType === 'add') {
-            // const result = await this.projectService.addProject(state);
+            result = await projectService.addProject(state);
         } 
 
         if (state.saveType === 'update') {
-            // const result = await this.projectService.updateProject(state);
+            result = await projectService.updateProject(state);
         }
 
         // if (result.status === 200) {
-        //     this.redirectToProjects();
+        //     redirectToProjects();
         // }
     }
 
@@ -68,7 +78,7 @@ const FormInput = ({project}) => {
             </div>
             <div>
                 <div>Project name</div>
-                <textarea className="nameInput" name="name" value={state.name} onChange={handleChange}></textarea>
+                <textarea className="nameInput" name="projectName" value={state.projectName} onChange={handleChange}></textarea>
             </div>
             <div>
                 <div>Description</div>

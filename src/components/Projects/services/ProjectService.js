@@ -29,6 +29,16 @@ export default class ProjectService {
     }
   };
 
+  updateProject = async (project) => {
+    try {
+      console.log(project);
+      return await axios.put(`http://localhost:5000/projects/`, project, {});
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
   deleteProject = async (id) => {
     try {
       return await axios.delete(`http://localhost:5000/projects/${id}`, {});
