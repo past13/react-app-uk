@@ -5,8 +5,6 @@ import { withRouter } from 'react-router-dom';
 
 import FormInput from './../FormInput';
 
-import './ProjectEdit.css';
-
 class ProjectEdit extends Component {
     constructor(props) {
         super(props);

@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import Button from '../buttons/SubmitButton'
 import ProjectService from './services/ProjectService';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+
+import FormInputStyles from './FormInputStyles';
 
 const FormInput = ({project}) => {
     const [state, setState] = React.useState({});
@@ -67,40 +69,39 @@ const FormInput = ({project}) => {
       }
 
     return (
-        <form onSubmit={handleSubmit}>
-
-            <div className="uploadPhotoContainer">
-                <div>Upload your photos</div>
-                <div className="uploadPhotoPlaceHolder"></div>
-                <div className="uploadPhotoPlaceHolder"></div>
-                <div className="uploadPhotoPlaceHolder"></div>
-                <div className="uploadPhotoPlaceHolder"></div>
-                <div className="uploadPhotoPlaceHolder"></div>
-            </div>
-            <div>
-                <div>Project name</div>
-                <textarea className="nameInput" name="projectName" value={state.projectName} onChange={handleChange}></textarea>
-            </div>
-            <div>
-                <div>Description</div>
-                <textarea className="descriptionInput" name="description" value={state.description} onChange={handleChange}></textarea>
-            </div>
-            <div>
-                <div>Your mobile number</div>
-                <textarea className="phoneNumberInput" name="phoneNumber" value={state.phoneNumber} onChange={handleChange}></textarea>
-            </div>
-            <div>
-                <div>Your email</div>
-                <textarea className="emailInput" name="email" value={state.email} onChange={handleChange}></textarea>
-            </div>
-            <div>
-                <div>Created date</div>
-                <div className="createdDate">{state.createdAt}</div>
-            </div>
-            <div className="buttonContainer">
-                <Button />
-            </div>
-        </form> 
+        <FormInputStyles>
+            <form onSubmit={handleSubmit}>
+                <div className="uploadPhotoContainer">
+                    <div>Upload your photos</div>
+                    <div className="uploadPhotoPlaceHolder">
+                        <a>Upload photo</a>
+                    </div>
+                </div>
+                <div>
+                    <div>Project name</div>
+                    <textarea className="nameInput" name="projectName" value={state.projectName} onChange={handleChange}></textarea>
+                </div>
+                <div>
+                    <div>Description</div>
+                    <textarea className="descriptionInput" name="description" value={state.description} onChange={handleChange}></textarea>
+                </div>
+                <div>
+                    <div>Your mobile number</div>
+                    <textarea className="phoneNumberInput" name="phoneNumber" value={state.phoneNumber} onChange={handleChange}></textarea>
+                </div>
+                <div>
+                    <div>Your email</div>
+                    <textarea className="emailInput" name="email" value={state.email} onChange={handleChange}></textarea>
+                </div>
+                <div>
+                    <div>Created date</div>
+                    <div className="createdDate">{state.createdAt}</div>
+                </div>
+                <div className="buttonContainer">
+                    <Button />
+                </div>
+            </form> 
+        </FormInputStyles>
     );
 }
 
