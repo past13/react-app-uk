@@ -64,21 +64,11 @@ const DropZoneElement = () => {
                 <img
                     src={file.preview}
                     style={img}
+                    alt=""
                 />
                 </div>
             </div>
     ))
-
-    // const thumbs = files.map(file => (
-    //     <div style={thumb} key={file.name}>
-    //         <div style={thumbInner}>
-    //         <img
-    //             src={file.preview}
-    //             style={img}
-    //         />
-    //         </div>
-    //     </div>
-    // ));
 
   useEffect(() => () => {
     // Make sure to revoke the data uris to avoid memory leaks

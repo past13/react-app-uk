@@ -4,7 +4,7 @@ import Button from '../buttons/SubmitButton'
 import ProjectService from './services/ProjectService';
 import FormInputStyles from './FormInputStyles';
 
-import DropZoneElement from '../dropcomponent/DropZoneElement';
+import DropZoneElement from './../../utils/DropZoneElement';
 
 const FormInput = ({project}) => {
     const [state, setState] = React.useState({});
