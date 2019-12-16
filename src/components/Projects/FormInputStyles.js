@@ -5,8 +5,6 @@ const FormInputStyles = styled.div`
         display: inline-block;
         width: 130px;
         height: 100px;
-        margin: 10px;
-        padding: 5px;
         border-radius: 5%;
         background-color: rgba(206, 205, 205, 0.897); 
     }

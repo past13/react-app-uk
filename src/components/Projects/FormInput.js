@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 import Button from '../buttons/SubmitButton'
 import ProjectService from './services/ProjectService';
-import { useHistory } from 'react-router-dom';
-
 import FormInputStyles from './FormInputStyles';
+
+import DropZoneElement from '../dropcomponent/DropZoneElement';
 
 const FormInput = ({project}) => {
     const [state, setState] = React.useState({});
@@ -72,9 +73,8 @@ const FormInput = ({project}) => {
         <FormInputStyles>
             <form onSubmit={handleSubmit}>
                 <div className="uploadPhotoContainer">
-                    <div>Upload your photos</div>
                     <div className="uploadPhotoPlaceHolder">
-                        <a>Upload photo</a>
+                        <DropZoneElement />
                     </div>
                 </div>
                 <div>
