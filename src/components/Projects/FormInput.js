@@ -72,11 +72,7 @@ const FormInput = ({project}) => {
     return (
         <FormInputStyles>
             <form onSubmit={handleSubmit}>
-                <div className="uploadPhotoContainer">
-                    <div className="uploadPhotoPlaceHolder">
-                        <DropZoneElement />
-                    </div>
-                </div>
+                <DropZoneElement />
                 <div>
                     <div>Project name</div>
                     <textarea className="nameInput" name="projectName" value={state.projectName} onChange={handleChange}></textarea>
